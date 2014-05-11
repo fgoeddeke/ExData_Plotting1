@@ -1,0 +1,8 @@
+setwd("~/Magic Briefcase/coursera/Exploratory/proj1")
+dat <- read.table("household_power_consumption.txt", skip = 66637, nrow = 2880, sep = ";", col.names = colnames(read.table("household_power_consumption.txt", nrow = 1, header = TRUE, sep=";")))
+dat$Date <- as.character(dat$Date)
+dat$Time <- as.character(dat$Time)
+dat$dateTime <- as.POSIXct(strptime(paste(dat$Date,dat$Time), "%d/%m/%Y %H:%M:%S"))
+plot(dat$dateTime, dat$Global_active_power, xlab = "", ylab="Global Active Power (kilowatts)", type="l")
+dev.copy(png, file="plot2.png")
+dev.off()
